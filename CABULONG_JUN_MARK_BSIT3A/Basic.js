@@ -1,30 +1,30 @@
 class Student {
-    constructor(name, age, course) {
+    constructor(name, age, course, grade) {
         this.name = name;
         this.age = age;
         this.course = course;
+        this.grade = grade;
     }
 
     introduce() {
-        console.log("Hello, my name is " + this.name);
-        console.log("I am " + this.age + " years old.");
-        console.log("My course is " + this.course);
+        console.log("Name: " + this.name);
+        console.log("Age: " + this.age);
+        console.log("Course: " + this.course);
+        console.log("Grade: " + this.grade);
     }
 
-    study() {
-        console.log(this.name + " is studying.");
+    checkGrade() {
+        if (this.grade >= 75) {
+            console.log(this.name + " passed.");
+        } else {
+            console.log(this.name + " failed.");
+        }
     }
 }
 
-let student1 = new Student("Jun Mark", 20, "Information Technology");
+let student = new Student("Jun Mark", 20, "BSIT", 85);
 
-console.log("===== STUDENT INFORMATION =====");
+console.log("===== STUDENT =====");
 
-student1.introduce();
-student1.study();
-
-if (student1.age >= 18) {
-    console.log(student1.name + " is an adult.");
-} else {
-    console.log(student1.name + " is a minor.");
-}
+student.introduce();
+student.checkGrade();
