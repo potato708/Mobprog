@@ -1,45 +1,50 @@
+
 let cafeName = "Morning Brew";
-let customer1 = "Lee";
-let customer2 = "Sean";
-let customer3 = "Enaro";
-let orderNumber = 25;
-let tableNumber = 6;
-let coffeePrice = 80;
-let foodPrice = 120;
-let drinkSize = "Medium";
-let quantity = 2;
+let branch = "Downtown";
+let openingTime = "8:00 AM";
+let closingTime = "8:00 PM";
 
-const openingTime = "8:00 AM";
-const closingTime = "8:00 PM";
-const tax = 0.12;
-const serviceFee = 20;
-const coffee = "Iced Coffee";
-const food = "Club Sandwich";
-const dessert = "Chocolate Cake";
-const cashier = "Mia";
-const branch = "Downtown";
-const currency = "PHP";
+let customers = ["Lee", "Sean", "Enaro"];
 
-console.log(`Welcome to ${cafeName}.`);
-console.log(`Customer 1: ${customer1}`);
-console.log(`Customer 2: ${customer2}`);
-console.log(`Customer 3: ${customer3}`);
-console.log(`Order number: ${orderNumber}`);
-console.log(`Table number: ${tableNumber}`);
-console.log(`Coffee price: ${currency} ${coffeePrice}`);
-console.log(`Food price: ${currency} ${foodPrice}`);
-console.log(`Drink size: ${drinkSize}`);
-console.log(`Quantity: ${quantity}`);
-
-const welcome = () => {
-    return `Hello ${customer1}, ${customer2}, and ${customer3}!`;
+let coffee = {
+    name: "Iced Coffee",
+    price: 80,
+    size: "Medium",
+    quantity: 2
 };
 
-const totalPrice = (price1, price2) => {
+let food = {
+    name: "Club Sandwich",
+    price: 120
+};
+
+let dessert = "Chocolate Cake";
+let cashier = "Mia";
+
+const tax = 0.12;
+const serviceFee = 20;
+const currency = "PHP";
+
+console.log("===== MORNING BREW =====");
+console.log("Cafe: " + cafeName);
+console.log("Branch: " + branch);
+console.log("Open: " + openingTime + " - " + closingTime);
+
+console.log("\n===== CUSTOMERS =====");
+
+for (let customer of customers) {
+    console.log("- " + customer);
+}
+
+const welcome = () => {
+    return "Welcome, " + customers.join(", ") + "!";
+};
+
+const calculateTotal = (price1, price2) => {
     return price1 + price2;
 };
 
-const getTax = (amount) => {
+const calculateTax = (amount) => {
     return amount * tax;
 };
 
@@ -47,159 +52,89 @@ const checkPayment = (payment, total) => {
     return payment >= total;
 };
 
-const showOrder = () => {
-    return `${coffee} and ${food}`;
-};
+let subtotal = calculateTotal(coffee.price, food.price);
+let taxAmount = calculateTax(subtotal);
+let total = subtotal + taxAmount + serviceFee;
 
-console.log(welcome());
-console.log(`Total: ${currency} ${totalPrice(coffeePrice, foodPrice)}`);
-console.log(`Tax: ${currency} ${getTax(200)}`);
-console.log(`Payment enough: ${checkPayment(300, 200)}`);
-console.log(`Order: ${showOrder()}`);
+console.log("\n===== ORDER =====");
+console.log("Coffee: " + coffee.name);
+console.log("Size: " + coffee.size);
+console.log("Quantity: " + coffee.quantity);
+console.log("Food: " + food.name);
+console.log("Dessert: " + dessert);
+
+console.log("\n===== PAYMENT =====");
+console.log("Subtotal: " + currency + " " + subtotal);
+console.log("Tax: " + currency + " " + taxAmount);
+console.log("Service Fee: " + currency + " " + serviceFee);
+console.log("Total: " + currency + " " + total);
+
+let payment = 400;
+
+console.log("Payment: " + currency + " " + payment);
+
+if (checkPayment(payment, total)) {
+    console.log("Payment is enough.");
+    console.log("Change: " + currency + " " + (payment - total));
+} else {
+    console.log("Payment is not enough.");
+}
+
+console.log("\n===== MENU =====");
 
 let drinks = ["Coffee", "Tea", "Juice"];
-let [drink1, drink2, drink3] = drinks;
-
-let prices = [80, 60, 50];
-let [price1, price2, price3] = prices;
-
-let desserts = ["Cake", "Donut", "Brownie"];
-let [dessert1, dessert2, dessert3] = desserts;
-
-console.log(`First drink: ${drink1}`);
-console.log(`First price: ${price1}`);
-console.log(`First dessert: ${dessert1}`);
-
-let customerInfo = {
-    name1: "Lee",
-    name2: "Sean",
-    name3: "Enaro",
-    age: 21,
-    favoriteDrink: "Coffee"
-};
-
-let {
-    name1,
-    name2,
-    name3
-} = customerInfo;
-
-let cafeInfo = {
-    name: "Morning Brew",
-    location: "Downtown"
-};
-
-let {
-    name: cafe,
-    location
-} = cafeInfo;
-
-let orderInfo = {
-    item: "Iced Coffee",
-    size: "Medium",
-    price: 80
-};
-
-let {
-    item,
-    size,
-    price
-} = orderInfo;
-
-console.log(`Customer names: ${name1}, ${name2}, and ${name3}`);
-console.log(`Cafe: ${cafe}`);
-console.log(`Location: ${location}`);
-
-let hotDrinks = ["Coffee", "Hot Chocolate"];
-let coldDrinks = ["Iced Coffee", "Milkshake"];
-
-let allDrinks = [
-    ...hotDrinks,
-    ...coldDrinks
-];
 
 let updatedDrinks = [
-    ...allDrinks,
-    "Lemonade"
+    ...drinks,
+    "Milkshake"
 ];
 
-console.log(`Drinks: ${allDrinks}`);
-console.log(`Updated drinks: ${updatedDrinks}`);
+console.log("Drinks: " + updatedDrinks);
+
+let prices = [80, 60, 50, 120, 150];
+
+let affordableFood = prices.filter(price => price <= 100);
+
+console.log("Affordable prices: " + affordableFood);
+
+let upperMenu = drinks.map(drink => drink.toUpperCase());
+
+console.log("Menu: " + upperMenu);
+
+console.log("\n===== ORDER DETAILS =====");
 
 let basicOrder = {
-    item: "Coffee",
-    size: "Small"
-};
-
-let biggerOrder = {
-    ...basicOrder,
-    price: 80
+    item: coffee.name,
+    size: coffee.size
 };
 
 let finalOrder = {
-    ...biggerOrder,
-    quantity: 2
+    ...basicOrder,
+    price: coffee.price,
+    quantity: coffee.quantity
 };
 
-console.log(biggerOrder);
 console.log(finalOrder);
 
-let numbers = [10, 20, 30, 40, 50];
+console.log("\n===== CUSTOMER INFORMATION =====");
 
-let newNumbers = numbers.map(number => {
-    return number + 5;
-});
-
-let menu = ["coffee", "tea", "cake"];
-
-let menuList = menu.map(item => {
-    return item.toUpperCase();
-});
-
-console.log(`New numbers: ${newNumbers}`);
-console.log(`Menu: ${menuList}`);
-
-let foodPrices = [50, 80, 100, 150, 200];
-
-let cheapFood = foodPrices.filter(price => {
-    return price <= 100;
-});
-
-let expensiveFood = foodPrices.filter(price => {
-    return price >= 150;
-});
-
-console.log(`Affordable food: ${cheapFood}`);
-console.log(`Expensive food: ${expensiveFood}`);
-
-let cafeBranch = {
-    name: "Morning Brew",
-    manager: {
-        name: "Mia"
-    }
-};
-
-let managerName = cafeBranch.manager?.name;
-
-let customerAddress = {
+let customerInfo = {
     name: "Lee",
     address: {
-        city: "Downtown"
+        city: "Calbayog City"
     }
 };
 
-let customerCity = customerAddress.address?.city;
+let customerCity = customerInfo.address?.city;
 
-console.log(`Manager: ${managerName}`);
-console.log(`Customer city: ${customerCity}`);
+console.log("Customer: " + customerInfo.name);
+console.log("City: " + customerCity);
 
-console.log(`The cafe is ${cafeName}.`);
-console.log(`Today's customers are ${customer1}, ${customer2}, and ${customer3}.`);
-console.log(`The order number is ${orderNumber}.`);
-console.log(`The customers ordered ${coffee}.`);
-console.log(`The food ordered is ${food}.`);
-console.log(`The dessert available is ${dessert}.`);
-console.log(`The cafe opens at ${openingTime}.`);
-console.log(`The cafe closes at ${closingTime}.`);
-console.log(`The cashier is ${cashier}.`);
-console.log(`The branch is ${branch}.`);
+console.log("\n===== SUMMARY =====");
+
+console.log(welcome());
+console.log("Cashier: " + cashier);
+console.log("Order: " + coffee.name + " and " + food.name);
+console.log("Dessert: " + dessert);
+console.log("Total: " + currency + " " + total);
+```
