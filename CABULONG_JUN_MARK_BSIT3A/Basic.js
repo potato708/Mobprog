@@ -1,37 +1,30 @@
-let name = "Jun Mark";
-let age = 20;
-let course = "Information Technology";
-let grade = 85;
+class Student {
+    constructor(name, age, course) {
+        this.name = name;
+        this.age = age;
+        this.course = course;
+    }
 
-console.log("Hello, " + name);
-console.log("Your age is " + age);
-console.log("Your course is " + course);
+    introduce() {
+        console.log("Hello, my name is " + this.name);
+        console.log("I am " + this.age + " years old.");
+        console.log("My course is " + this.course);
+    }
 
-if (age >= 18) {
-    console.log("You are an adult.");
+    study() {
+        console.log(this.name + " is studying.");
+    }
+}
+
+let student1 = new Student("Jun Mark", 20, "Information Technology");
+
+console.log("===== STUDENT INFORMATION =====");
+
+student1.introduce();
+student1.study();
+
+if (student1.age >= 18) {
+    console.log(student1.name + " is an adult.");
 } else {
-    console.log("You are a minor.");
+    console.log(student1.name + " is a minor.");
 }
-
-if (grade >= 90) {
-    console.log("Your grade is Excellent.");
-} else if (grade >= 75) {
-    console.log("You passed.");
-} else {
-    console.log("You failed.");
-}
-
-let subjects = ["IT303", "IT304", "IT Elec2"];
-
-console.log("Your subjects:");
-
-for (let subject of subjects) {
-    console.log("- " + subject);
-}
-
-function introduce() {
-    console.log("My name is " + name);
-    console.log("I am taking " + course);
-}
-
-introduce();
