@@ -1,3 +1,4 @@
+                    
 let schoolConfig = {
     campus: "Main Campus",
     location: "Calbayog City"
@@ -19,8 +20,9 @@ let students = [];
 class Info {
     constructor(name, age) {
         if (this.constructor === Info) {
-            throw new Error("Abstract class 'Info' cannot be instantiated directly.");
+            throw new Error("Info is an abstract class.");
         }
+
         this.name = name;
         this.age = age;
     }
@@ -50,8 +52,21 @@ class Student extends Info {
         return this.#grade;
     }
 
+    getStatus() {
+        if (this.#grade >= gradingScale.excellentMark) {
+            return "Excellent";
+        } else if (this.#grade >= gradingScale.passingMark) {
+            return "Passed";
+        } else {
+            return "Failed";
+        }
+    }
+
     introduce() {
-        console.log("Hi! I am student " + this.name + " (" + this.age + " yrs old).");
+        console.log(
+            "Hi! I am student " + this.name +
+            ", " + this.age + " years old."
+        );
     }
 }
 
@@ -62,11 +77,11 @@ class Teacher extends Info {
     }
 
     teach() {
-        console.log(this.name + " is teaching " + this.subject);
+        console.log(this.name + " is teaching " + this.subject + ".");
     }
 
     introduce() {
-        console.log("Hello! I am teacher " + this.name);
+        console.log("Hello! I am teacher " + this.name + ".");
     }
 }
 
@@ -84,55 +99,51 @@ class Course {
 
 let student1 = new Student("Jun", 21, 80);
 let student2 = new Student("Mark", 19, 92);
+
 let teacher1 = new Teacher("Sir Yuri", 26, "IT303");
 let course1 = new Course("Information Technology");
 
 students.push(student1);
 students.push(student2);
 
-console.log("--- System Information ---");
-console.log("Location: " + schoolConfig.campus + ", " + schoolConfig.location);
+console.log("===== SCHOOL INFORMATION =====");
+console.log("School: " + schoolName);
+console.log("Campus: " + schoolConfig.campus);
+console.log("Location: " + schoolConfig.location);
+console.log("Year: " + year);
+console.log("Status: " + (isOpen ? "Open" : "Closed"));
 
-console.log("\n--- Introductions ---");
-student1.introduce();
-student1.study();
+console.log("\n===== STUDENTS =====");
+
+for (let student of students) {
+    student.introduce();
+    student.study();
+    console.log("Grade: " + student.getGrade());
+    console.log("Status: " + student.getStatus());
+    console.log();
+}
+
+console.log("===== TEACHER =====");
 
 teacher1.introduce();
 teacher1.teach();
 
+console.log("\n===== COURSE =====");
+
 course1.showCourse();
 
-console.log("\n--- Conditional Checks ---");
+console.log("\n===== SUBJECTS =====");
 
-if (student1.getGrade() >= gradingScale.excellentMark) {
-    console.log(student1.name + " has an Excellent Grade!");
-} else {
-    console.log(student1.name + " has a Regular Grade.");
+for (let subject of subjects) {
+    console.log("- " + subject);
 }
 
-if (isOpen) {
-    console.log(schoolName + " is open.");
-}
+console.log("\n===== GRADES =====");
 
-if (year === 2026) {
-    console.log("Current year is 2026.");
-}
-
-console.log("\n--- Loops Output ---");
-
-console.log("Subjects:");
-for (let i = 0; i < subjects.length; i++) {
-    console.log(" - " + subjects[i]);
-}
-
-console.log("\nRegistered Students:");
-for (let student of students) {
-    console.log(" - Student: " + student.name);
-}
-
-console.log("\nGrades List:");
 let count = 0;
+
 while (count < grades.length) {
-    console.log(" - Grade: " + grades[count]);
+    console.log("- Grade: " + grades[count]);
     count++;
 }
+```
